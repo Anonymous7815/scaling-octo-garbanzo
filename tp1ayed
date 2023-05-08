@@ -1,0 +1,126 @@
+import getpass 
+intentos = 0
+valida = 0
+nombre_usuario = "admin@shopping.com"
+clave_usuario = int(12345)
+while intentos < 3 and valida < 1:
+	usuario = (input("ingrese su nombre de usuario: ")) 
+	contraseña = int(getpass.getpass("ingrese su contraseña: "))
+	if usuario == nombre_usuario and contraseña == clave_usuario:
+		valida = valida + 1
+		print("¡ingreso exitoso!")
+	else:
+		intentos = intentos + 1
+		print("su usuario o contraseña es incorrecto")
+
+def crear_locales():
+    bucle_calculo = True
+    bucle_proceso = True
+    subproceso = True
+    cant_indum = 0
+    cant_perfum = 0
+    cant_comida = 0   
+    print("¡Bienvenido a la creación de locales!")
+    print("Coloque 0 en todas las opciones para finalizar")
+    while (bucle_proceso == True):
+        bucle_calculo = True
+        subproceso = True
+        nombre_local = str(input("Nombre del local: "))
+        ubicacion_local = str(input("Ingrese la ubicación del local: "))
+        rubro_local = str(input("Ingrese el rubro del local (Indumentaria, Perfumeria o Comida): "))
+        while (subproceso == True):
+            if (rubro_local != "Indumentaria" and rubro_local != "Perfumeria" and rubro_local != "Comida" and rubro_local != "0"):
+                subproceso = False
+            while (bucle_calculo == True and rubro_local != 0):
+                local_mayor = "Indumentaria"
+                local_menor = "Indumentaria"
+                cant_mayor = cant_indum 
+                cant_menor = cant_indum
+                if (rubro_local == "Indumentaria"):
+                    cant_indum += 1
+                if (rubro_local == "Perfumeria"):
+                    cant_perfum += 1
+                if (rubro_local == "Comida"):
+                    cant_comida += 1
+                bucle_calculo = False
+            subproceso = False
+            if (nombre_local == "0" and ubicacion_local == "0" and rubro_local == "0"):
+                if (cant_perfum > cant_mayor): 
+                    cant_mayor = cant_perfum 
+                    local_mayor = "Perfumeria"
+                if (cant_comida > cant_mayor):  
+                    cant_mayor = cant_comida 
+                    local_mayor = "Comida"
+                elif (cant_indum < cant_menor): 
+                    cant_menor = cant_indum 
+                    local_menor = "Indumentaria"
+                elif (cant_perfum <= cant_menor): 
+                    cant_menor = cant_perfum 
+                    local_menor = "Perfumeria"
+                print("Carga de datos finalizada...")
+                print("El rubro con más locales es: ", local_mayor, cant_mayor)
+                print("El rubro con menos locales es: ", local_menor, cant_menor)
+                bucle_proceso = False        
+
+
+def gestion_locales():
+	print("a. Crear locales")
+	print("b. Modificar locales")
+	print("c. Eliminar local")
+	print("d. Volver")
+	opcion = input("ingrese su opcion: ")
+	if opcion == "a":
+		crear_locales()
+	elif opcion == "b":
+		print("En construccion")
+	elif opcion == "c":
+		print("En construccion")
+	elif opcion == "d":
+		print("Volver")
+	return gestion_locales
+
+def gestion_novedades():
+	print("a. Crear novedades")
+	print("b. Modificar novedad")
+	print("c. Eliminar local")
+	print("d. Ver reporte de novedades")
+	print("e. Volver")
+	opcion = input("Ingrese su opcion: ")
+	if opcion == "a":
+		print("Crear novedades")
+	elif opcion == "b":
+		print("Modificar novedad")
+	elif opcion == "c":
+		print("Eliminar local")
+	elif opcion == "d":
+		print("Ver reporte de novedades")
+	elif opcion == "e":
+		print("Volver")
+	return gestion_novedades
+
+def menu_principal():	
+	print("Menu principal: ")
+	print("1. Gestion de locales")
+	print("2. Crear cuentas de dueños locales")
+	print("3. Aprobar o denegar solicitud de descuento")
+	print("4. Gestion de novedades")
+	print("5. Reporte de utilizacion de descuentos")
+	print("0. Salir")
+	opcion = int(input("ingrese su opcion: "))	
+	while opcion >= 0 and opcion <=5:
+		if opcion == 1:
+			gestion_locales()
+		elif opcion == 2:
+			print("Crear cuentas de dueños locales")
+		elif opcion == 3: 
+			print("Aprobar o denegar solicitud de descuento")
+		elif opcion == 4:
+			gestion_novedades()
+		elif opcion == 5: 
+			print("Reporte de utilizacion de descuentos")
+		elif opcion == 0:
+			print("Saliendo del programa")
+		return menu_principal
+
+menu_principal()
+print(menu_principal())
